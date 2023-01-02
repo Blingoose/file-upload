@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { Unauthenticated } from "../errors/unauthenticated.js";
+import { Unauthenticated } from "../errors/unauthenticated-error.js";
 import { asyncWrapper } from "../middleware/asyncWrapper.js";
 
 export const auth = asyncWrapper(async (req, res, next) => {

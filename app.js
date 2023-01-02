@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import connectDB from "./db/connectDB.js";
 import { notFound } from "./middleware/not-found.js";
 import { errorHandlerMiddleware } from "./middleware/error-handler.js";
+import { router } from "./routes/productRoutes.js";
 
 dotenv.config();
 
@@ -16,6 +17,8 @@ const start = async () => {
     server.get("/", (req, res) => {
       res.send("<h1>File Upload Starter<h1/>");
     });
+
+    server.use("api/v1/products", router);
 
     // error handling middleware
     server.use(errorHandlerMiddleware);
