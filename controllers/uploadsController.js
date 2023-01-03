@@ -24,5 +24,7 @@ export const uploadProductImage = asyncWrapper(async (req, res, next) => {
 
   await productImage.mv(imagePath);
 
-  res.send("Image uploaded");
+  return res
+    .status(StatusCodes.OK)
+    .json({ imageSrc: `/uploads/${productImage.name}` });
 });

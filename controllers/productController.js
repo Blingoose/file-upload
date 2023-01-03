@@ -11,7 +11,8 @@ const createProduct = asyncWrapper(async (req, res, next) => {
 });
 
 const getAllProducts = asyncWrapper(async (req, res, next) => {
-  res.send("list of products");
+  const products = await Product.find({});
+  res.status(StatusCodes.OK).json({ products });
 });
 
 export { createProduct, getAllProducts };
