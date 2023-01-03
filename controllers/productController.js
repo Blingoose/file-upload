@@ -7,7 +7,6 @@ import { StatusCodes } from "http-status-codes";
 const createProduct = asyncWrapper(async (req, res, next) => {
   const product = await Product.create(req.body);
   res.status(StatusCodes.CREATED).json({ product });
-  res.send("Create product");
 });
 
 const getAllProducts = asyncWrapper(async (req, res, next) => {
