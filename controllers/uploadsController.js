@@ -1,5 +1,5 @@
 import fs from "fs";
-import path from "path";
+import path, { dirname } from "path";
 import { StatusCodes } from "http-status-codes";
 import { asyncWrapper } from "../middleware/asyncWrapper.js";
 import { fileURLToPath } from "url";
@@ -42,7 +42,7 @@ const __dirname = fileURLToPath(new URL(".", import.meta.url));
 // });
 
 export const uploadProductImage = asyncWrapper(async (req, res, next) => {
-  console.log(req.files.image);
+  // console.log(req.files.image);
   const result = await cloudinary.uploader.upload(
     req.files.image.tempFilePath,
     {
@@ -50,5 +50,11 @@ export const uploadProductImage = asyncWrapper(async (req, res, next) => {
       folder: "File Upload (Mini-Project)",
     }
   );
-  console.log(result);
+
+  //remove tmp file
+  fs.unlinkSync(req.files.image.tempFilePath);
+  //remove tmp dir
+  fs.rmdirSync(path.join(__dirname, "../tmp"));
+
+  return res.status(StatusCodes.OK).json({ imageSrc: result.secure_url });
 });
