@@ -6,8 +6,15 @@ import { notFound } from "./middleware/not-found.js";
 import { errorHandlerMiddleware } from "./middleware/error-handler.js";
 import { router } from "./routes/productRoutes.js";
 import fileUpload from "express-fileupload";
+import { v2 as cloudinary } from "cloudinary";
 
 dotenv.config();
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API_KEY,
+  api_secret: process.env.CLOUD_API_SECRET,
+});
 
 const start = async () => {
   try {
@@ -16,7 +23,7 @@ const start = async () => {
 
     server.use(express.static("./public"));
     server.use(express.json());
-    server.use(fileUpload());
+    server.use(fileUpload({ useTempFiles: true }));
 
     // routes
     server.get("/", (req, res) => {
