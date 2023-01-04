@@ -1,9 +1,9 @@
 import fs from "fs";
-import path, { dirname } from "path";
+import path from "path";
 import { StatusCodes } from "http-status-codes";
 import { asyncWrapper } from "../middleware/asyncWrapper.js";
 import { fileURLToPath } from "url";
-import { BadRequest } from "../errors/bad-request.js";
+// import { BadRequest } from "../errors/bad-request.js";
 import { v2 as cloudinary } from "cloudinary";
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 // export const uploadProductImageLOCAL = asyncWrapper(async (req, res, next) => {
